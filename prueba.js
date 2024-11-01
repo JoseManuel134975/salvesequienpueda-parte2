@@ -1,0 +1,1 @@
+const prueba = (nombre) => `Hola ${nombre}`
