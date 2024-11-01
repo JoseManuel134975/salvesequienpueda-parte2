@@ -1,0 +1,242 @@
+/* GENERAL */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: black;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+h1{
+    color: goldenrod;
+}
+
+ul, li{
+    list-style: none;
+}
+
+/* HEADER */
+header{
+    text-align: center;
+}
+
+header #logo{
+    width: 200px;
+}
+
+header h1{
+    font-size: 40px;
+}
+
+header h1:hover{
+    text-shadow: 0px 0px 20px;
+    cursor: pointer;
+}
+
+/* NAV */
+nav{
+    background-color: grey;
+    margin-top: 20px;
+    box-shadow: 0px 0px 20px inset black;
+}
+
+nav a{
+    text-decoration: none;
+    color: gainsboro;
+    font-weight: bold;
+}
+
+nav > ul > li{
+    display: inline-block;
+    text-align: center;
+    padding: 20px;
+}
+
+nav > ul > li:last-child{
+    position: relative;
+}
+
+#submenu{
+    display: none;
+    position: absolute;
+}
+
+nav > ul{
+    text-align: center;
+}
+
+nav > ul > li:last-child:hover > #submenu{
+    display: block;
+    background-color: gray;
+    border-radius: 2px;
+    margin-top: 20px;
+    width: 102px;
+    right: 0%;
+    left: 0%;
+}
+
+nav > ul > li:last-child:hover > #submenu > li{
+    padding: 10px;
+}
+
+nav > ul > li:last-child:hover > #submenu > li:hover{
+    background-color: goldenrod;
+    box-shadow: 0px 0px 10px;
+}
+
+nav > ul > li:hover{
+    background-color: goldenrod;
+    box-shadow: 0px 0px 10px ;
+}
+
+/* BANNER */
+#banner{
+    width: 100%;
+}
+
+#banner img{
+    width: 100%;
+    height: 480px;
+}
+
+/* SECCIÓN INFOPANEL */
+.infoPanel{
+    background-color: gray;
+    text-align: center;
+    margin-top: 20px;
+    overflow: auto;
+    box-shadow: 0px 0px 20px inset black;
+}
+
+.infoPanel img{
+    width: 70px;
+}
+
+.infoPanel article{
+    display: inline-block;
+    overflow: auto;
+}
+
+.infoPanel div{
+    padding: 20px;
+    width: 350px;
+    overflow: auto;
+}
+
+.infoPanel div img{
+    float: left;
+}
+
+.infoPanel p{
+    margin-right: 40px;
+    color: gainsboro;
+}
+
+.infoPanel p:first-of-type{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+/* SECCIÓN NOVEDADES */
+.novedades{
+    width: 80%;
+    margin: 0 auto;
+    overflow-x: auto;
+    display: flex;
+    background-color: gray;
+    border: 3px solid goldenrod;
+    padding: 20px;
+    box-shadow: 0px 0px 10px inset;
+}
+
+.infoPanel + h2{
+    color: darkgoldenrod;
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.infoPanel + h2 span{
+    color: gold;
+}
+
+.novedades article{
+    flex: 0 0 auto;
+    width: 20%;
+}
+
+.novedades img{
+    width: 225px;
+    border: 3px solid black;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px;
+}
+
+.novedades div{
+    position: relative;
+}
+
+.novedades p{
+    color: gainsboro;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 15px;
+    text-align: left;
+}
+
+.novedades button{
+    position: absolute;
+    z-index: 10;
+    bottom: 0%;
+    right: 0%;
+    padding: 3px;
+    background-color: goldenrod;
+    color: gainsboro;
+    font-weight: bold;
+    box-shadow: 0px 0px 4px black;
+}
+
+/* SECCIÓN IMAGENES */
+.imagenes{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.imagenes div{
+    float: left;
+    margin: 5px;
+}
+
+.imagenes > div:nth-child(even){
+    margin-right: 0;
+}
+
+.imagenes img{
+    width: 600px;
+    height: 300px;
+    border-radius: 5px;
+}
+
+/* FOOTER */
+footer{
+    clear: both;
+    background-color: gray;
+    text-align: center;
+    padding: 20px;
+    color: gainsboro;
+    font-weight: bold;
+    box-shadow: 0px 0px 20px inset black;
+}
+
+footer a{
+    text-decoration: none;
+    color: goldenrod;
+}
+
+footer a:hover{
+    text-decoration: underline;
+}
