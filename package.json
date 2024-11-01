@@ -1,0 +1,15 @@
+{
+  "name": "salvesequienpueda-parte2",
+  "version": "1.0.0",
+  "description": "Esto es la guerra... ¡¡¡A LA CARGAAAAA!!!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jsdoc": "^4.0.4"
+  }
+}
