@@ -102,113 +102,54 @@ nav > ul > li:hover{
     box-shadow: 0px 0px 10px ;
 }
 
-/* BANNER */
-#banner{
-    width: 100%;
-    position: relative;
-}
-
-#banner img{
-    width: 100%;
-    height: 480px;
-}
-
-#banner h2{
-    position: absolute;
-    color: black;
-    top: 40%;
-    left: 6.5%;
-    font-size: 50px;
-    text-align: center;
-    text-shadow: 4px 4px 4px goldenrod;
-}
-
-/* SECCIÓN MARCAS */
-main > h2:first-child{
-    margin-top: 100px;
-    text-align: center;
-}
-
-main > h2:first-child > span{
-    color: gold;
-}
-
-.marcas{
-    width: 100%;
-    background-color: gray;
-    box-shadow: 0px 0px 20px inset black;
-    overflow-x: auto;
-    display: flex;
-}
-
-.marcas img{
-    width: 150px;
-    height: 150px;
-}
-
-.marcas div{
-    display: inline-block;
-    flex: 0 0 auto;
-    width: 20%;
-    text-align: center;
-    padding: 20px;
-    border: 3px solid gold;
-    box-shadow: 4px 4px 4px inset, -8px -4px 5px;
-}
-
-/* SECCIÓN LEAFLET */
-.leaflet{
-    width: 80%;
+/* FORM */
+form{
+    width: 50%;
     margin: 0 auto;
-    overflow: auto;
-    box-shadow: 0px 0px 10px inset;
     background-color: gray;
+    margin-top: 100px;
     padding: 20px;
-}
-
-.leaflet > h2{
-    font-size: 40px;
-    margin-bottom: 20px;
-}
-
-.leaflet article{
-    width: 100%;
-    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 10px inset;
+    text-align: center;
     overflow: auto;
 }
 
-.burguerKing{
-    margin-right: 0;
+form label{
+    color: gold;
+    font-size: 35px;
+    font-weight: bold;
+    text-shadow: 0px 0px 4px;
 }
 
-.map-container{
-    width: 30%;
-    height: 300px;
-    float: left;
-    margin-right: 2%;
+form h2{
+    font-size: 60px;
+    margin-bottom: 40px;
+    text-shadow: 0px 0px 10px black;
+}
+
+form input{
+    margin-bottom: 80px;
+    width: 50%;
+    height: 50px;
+    font-size: 20px;
     border-radius: 10px;
-}
-
-.leaflet p, .leaflet ol{
-    width: 68%;
+    background-color: gold;
     color: gainsboro;
+    border: 3px solid black;
+    box-shadow: 0px 0px 10px white;
 }
 
-.leaflet li img{
-    width: 25px;
-    text-align: center;
-    margin-right: 10px;
-    padding-top: 10px;
+form input:hover{
+    background-color: white;
 }
 
-.leaflet li{
-    text-align: left;
+form input:focus{
+    background-color: goldenrod;
 }
 
-hr{
-    border: 1px solid gold;
-    margin-bottom: 20px;
-    margin-top: 3px;
+form input[type="submit"]{
+    color: black;
 }
 
 /* FOOTER */
