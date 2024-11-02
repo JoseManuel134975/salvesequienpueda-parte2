@@ -25,7 +25,7 @@ jobs:
         run: npm run docs  # Ejecuta el script que genera la documentación
 
       - name: Upload Documentation
-        uses: actions/upload-artifact@v2 # Acción que crea un artefacto a partir de la documentación
+        uses: actions/upload-artifact@v4 # Acción que crea un artefacto a partir de la documentación
         with:
           name: docs
           path: docs/  # Ruta donde se genera la documentación
