@@ -1,45 +1,64 @@
-name: Terraform AWS UnDeployment
+name: Generate Documentation & deploy on Terraform/AWS
+
 on:
-    push:
-        branches:
-            - main  # Cambia a la rama que desees
+  push:
+    branches:
+      - main  
 
 jobs:
-    terraform:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4 
+  build:
+    runs-on: ubuntu-latest
 
-            - name: Configure AWS Credentials
-              uses: aws-actions/configure-aws-credentials@v4
-              with:
-                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-                  aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-                  aws-region: "us-east-1"  # Cambia a la región de AWS que estás usando
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-            - name: Set up Terraform
-              uses: hashicorp/setup-terraform@v1
-              with:
-                  terraform_version: 1.0.0  # Cambia según la versión de Terraform que desees usar
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
 
-            - name: Initialize Terraform
-              run: | 
-                terraform init
-                terraform destroy -auto-approve
-              working-directory: ./terraform  # Cambia a la ruta de tu proyecto
+      - name: Install dependencies
+        run: npm install
 
-            - name: Terraform plan
-              run: terraform plan
-              working-directory: ./terraform
+      - name: Generate documentation
+        run: npm run docs  # Ejecuta el script que genera la documentación
 
-            - name: Terraform apply
-              run: terraform apply -auto-approve
-              working-directory: ./terraform
+      - name: Upload Documentation
+        uses: actions/upload-artifact@v2 # Acción que crea un artefacto a partir de la documentación
+        with:
+          name: docs
+          path: docs/  # Ruta donde se genera la documentación
 
-            - name: Upload Terraform State
-              uses: actions/upload-artifact@v4
-              with:
-                  name: terraform-state
-                  path: ./terraform/terraform.tfstate  # Cambia a la ruta correcta
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4 # Acción para autenticarse en AWS
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} # ID
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # CLAVE PRIVADA
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }} # TOKEN TEMPORAL
+          aws-region: "us-east-1" # Región
+            
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1 # Acción para configurar Terraform
+        with:
+          terraform_version: 1.0.0  # Cambia según la versión de Terraform que desees usar
+
+      - name: Initialize Terraform
+        run: | # Inicializa y destruye automáticamente (si es que hay) el entorno de Terraform (archivos) 
+          terraform init
+          terraform destroy -auto-approve 
+          working-directory: ./terraform 
+
+      - name: Terraform plan
+        run: terraform plan
+        working-directory: ./terraform
+
+      - name: Terraform apply
+        run: terraform apply -auto-approve
+        working-directory: ./terraform
+
+      - name: Upload Terraform State
+        uses: actions/upload-artifact@v4 # Carga como artefacto el estado de Terraform después de sufrir cambios
+        with:
+          name: terraform-state
+          path: ./terraform/terraform.tfstate  # Cambia a la ruta correcta
