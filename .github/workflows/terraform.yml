@@ -46,11 +46,12 @@ jobs:
         with:
           terraform_version: 1.0.0  # Cambia según la versión de Terraform que desees usar
 
+      # Inicializa y destruye automáticamente (si es que hay) el entorno de Terraform (archivos) 
       - name: Initialize Terraform
-        run: | # Inicializa y destruye automáticamente (si es que hay) el entorno de Terraform (archivos) 
-          terraform init
-          terraform destroy -auto-approve 
-          working-directory: ./terraform 
+        run: terraform init
+      - name: Destroy before
+        run: terraform destroy -auto-approve
+        working-directory: ./terraform 
 
       - name: Terraform plan
         run: terraform plan
