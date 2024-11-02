@@ -21,6 +21,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Ensure JSDoc is executable
+        run: chmod +x node_modules/.bin/jsdoc # Esto asegura que jsdoc tenga permisos de ejecución
+
       - name: Generate documentation
         run: npm run docs  # Ejecuta el script que genera la documentación
 
