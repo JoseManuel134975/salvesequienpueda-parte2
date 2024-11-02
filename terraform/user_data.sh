@@ -2,6 +2,7 @@
 # Actualiza y instala Nginx
 sudo yum update -y
 sudo yum install -y nginx
+sudo yum install -y git
 sudo systemctl start nginx
 sudo systemctl enable nginx
 
