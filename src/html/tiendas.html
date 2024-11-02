@@ -48,21 +48,21 @@
 
         <!-- INICIO SECCIÓN MARCAS -->
         <section class="marcas">
-            <div><a href="https://www.sprintersports.com/"><img src="../assets/img/sprinter.png" alt="Sprinter"></a>
+            <div><a target="_blank" href="https://www.sprintersports.com/"><img src="../assets/img/sprinter.png" alt="Sprinter"></a>
             </div>
-            <div><a href="https://es.pandora.net/es/"><img src="../assets/img/Pandora_Logo_Blank.jpg" alt="Pandora"></a>
+            <div><a target="_blank" href="https://es.pandora.net/es/"><img src="../assets/img/Pandora_Logo_Blank.jpg" alt="Pandora"></a>
             </div>
-            <div><a href="https://www.mercadona.es/"><img src="../assets/img/logo-Mercadona.png" alt="Mercadona"></a>
+            <div><a target="_blank" href="https://www.mercadona.es/"><img src="../assets/img/logo-Mercadona.png" alt="Mercadona"></a>
             </div>
-            <div><a href="https://www.leroymerlin.es/"><img src="../assets/img/leroy merlin.png" alt="Leroy Merlin"></a>
+            <div><a target="_blank" href="https://www.leroymerlin.es/"><img src="../assets/img/leroy merlin.png" alt="Leroy Merlin"></a>
             </div>
-            <div><a href="https://burgerking.es/home"><img src="../assets/img/Burger_King_2020.svg.png"
+            <div><a target="_blank" href="https://burgerking.es/home"><img src="../assets/img/Burger_King_2020.svg.png"
                         alt="Burguer King"></a></div>
-            <div><a href="https://www.jdsports.es/"><img src="../assets/img/JD_Sports_logo.svg.png" alt="JD"></a></div>
-            <div><a href="https://kinepolis.es/?main_section=ya+a+la+venta"><img src="../assets/img/kineplis.jfif"
+            <div><a target="_blank" href="https://www.jdsports.es/"><img src="../assets/img/JD_Sports_logo.svg.png" alt="JD"></a></div>
+            <div><a target="_blank" href="https://kinepolis.es/?main_section=ya+a+la+venta"><img src="../assets/img/kineplis.jfif"
                         alt="Kinepolis"></a></div>
-            <div><a href="https://www.fnac.es/"><img src="../assets/img/Fnac_Logo.png" alt="FNAC"></a></div>
-            <div><a href="https://www.deichmann.com/es-es/"><img src="../assets/img/Deichmann_logo.png"
+            <div><a target="_blank" href="https://www.fnac.es/"><img src="../assets/img/Fnac_Logo.png" alt="FNAC"></a></div>
+            <div><a target="_blank" href="https://www.deichmann.com/es-es/"><img src="../assets/img/Deichmann_logo.png"
                         alt="Deichmann"></a></div>
         </section>
         <!-- FIN SECCIÓN MARCAS -->
@@ -136,28 +136,7 @@
 
     <!-- INICIO SCRIPT PARA USAR LA API DE LEAFLET -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script>
-        // Mapa 1
-        var map1 = L.map('map1').setView([37.21311017548976, -3.6149235141018696], 12); // Mercadona
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map1);
-        L.marker([37.21311017548976, -3.6149235141018696]).addTo(map1).bindPopup('Mapa 1: Mercadona');
-
-        // Mapa 2
-        var map2 = L.map('map2').setView([37.17505247806386, -3.5946676697269724], 12); // JD
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map2);
-        L.marker([37.17505247806386, -3.5946676697269724]).addTo(map2).bindPopup('Mapa 2: JD');
-
-        // Mapa 3
-        var map3 = L.map('map3').setView([37.21619736082923, -3.6087439584563494], 12); // Burguer King
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map3);
-        L.marker([37.21619736082923, -3.6087439584563494]).addTo(map3).bindPopup('Mapa 3: Burguer King');
-    </script>
+    <script src="../js/tiendas.js"></script>
     <!-- FIN SCRIPT PARA USAR LA API DE LEAFLET -->
 </body>
 
