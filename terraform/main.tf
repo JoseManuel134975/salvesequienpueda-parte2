@@ -2,6 +2,25 @@ provider "aws" {
   region = "us-east-1" # Cambia a tu región preferida
 }
 
+resource "aws_security_group" "allow_http_ssh" {
+  name        = "allow_http"
+  description = "Allow HTTP traffic"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # Permitir tráfico HTTP desde cualquier dirección IP
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"  # Permitir todo el tráfico saliente
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
 resource "aws_vpc" "mi_vpc" {
   cidr_block = "10.0.0.0/16"
   enable_dns_support = true
