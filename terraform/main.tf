@@ -57,6 +57,8 @@ resource "aws_instance" "mi_servidor_web" {
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.mi_subred_publica.id
 
+  vpc_security_group_ids = [aws_security_group.allow_http.id]  # Asocia el grupo de seguridad
+
   user_data = file("user_data.sh")
 
   tags = {
