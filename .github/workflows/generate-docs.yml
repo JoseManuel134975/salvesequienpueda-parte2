@@ -3,7 +3,7 @@ name: Generate JSDoc Documentation
 on:
   push:
     branches:
-      - main
+      - main 
   workflow_dispatch:
 
 jobs:
