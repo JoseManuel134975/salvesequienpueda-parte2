@@ -49,6 +49,7 @@ jobs:
       # Inicializa y destruye automáticamente (si es que hay) el entorno de Terraform (archivos) 
       - name: Initialize Terraform
         run: terraform init
+        working-directory: ./terraform
       - name: Destroy before
         run: terraform destroy -auto-approve
         working-directory: ./terraform 
