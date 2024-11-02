@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: contacto.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,35 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: contacto.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * 
+ * @param {string} user 
+ * @param {string} pass
+ * 
+ * @description Simula el inicio de sesión para cualquier usuario que esriba un nombre y contraseña
+ * Usa POO para crear el usuario y después mostrar sus propiedades mediante una alerta
+ * 
+ * @example iniciarSesion('pedro', '1234') alert('Bienvenido pedro. Tu clave es 1234')
+ */
+const iniciarSesion = (user, pass) => {
+    const usuario = {
+        nombre: user,
+        clave: pass
+    }
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    alert(`Bienvenido ${usuario.nombre}. Tu clave es '${usuario.clave}'`)
+}</code></pre>
+        </article>
+    </section>
 
 
 
