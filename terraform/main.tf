@@ -2,7 +2,7 @@ provider "aws" {
   region = "us-east-1" # Cambia a tu región preferida
 }
 
-resource "aws_security_group" "allow_http_ssh" {
+resource "aws_security_group" "allow_http" {
   name        = "allow_http"
   description = "Allow HTTP traffic"
 
