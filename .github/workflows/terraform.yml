@@ -25,7 +25,9 @@ jobs:
                   terraform_version: 1.0.0  # Cambia según la versión de Terraform que desees usar
 
             - name: Initialize Terraform
-              run: terraform init
+              run: | 
+                terraform init
+                terraform destroy -auto-approve
               working-directory: ./terraform  # Cambia a la ruta de tu proyecto
 
             - name: Terraform plan
