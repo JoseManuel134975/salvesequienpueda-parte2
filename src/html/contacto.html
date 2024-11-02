@@ -35,14 +35,14 @@
 
     <!--INICIO MAIN -->
     <main>
-        <form action="">
+        <form action="#">
             <h2>Iniciar sesión</h2>
             <label for="usuario">Usuario</label><br>
             <input type="text" placeholder="Nombre" name="usuario" id="usuario"><br>
             <label for="contrasena">Contraseña</label><br>
-            <input type="text" placeholder="Contraseña" name="contrasena" id="contrasena">
+            <input type="password" placeholder="Contraseña" name="contrasena" id="contrasena">
             <br>
-            <input onclick="" type="submit" value="Enviar">
+            <input onclick="iniciarSesion(document.getElementById('usuario').value, document.getElementById('contrasena').value)" type="submit" value="Enviar">
         </form>
     </main>
     <!--INICIO MAIN -->
@@ -53,6 +53,7 @@
         <p>Más contenido y tiendas en <a href="https://nevada.shopping/" target="_blank">otros centros como este</a></p>
     </footer>
     <!-- Fin footer -->
+    <script src="../js/contacto.js"></script>
 
 </body>
 
