@@ -34,7 +34,7 @@ resource "aws_route_table_association" "mi_asociacion_ruta" {
 }
 
 resource "aws_instance" "mi_servidor_web" {
-  ami           = "ami-0c55b159cbfafe01a" # Reemplaza con el ID de AMI que prefieras
+  ami           = "ami-06b21ccaeff8cd686" # Reemplaza con el ID de AMI que prefieras
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.mi_subred_publica.id
 
