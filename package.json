@@ -4,7 +4,8 @@
   "description": "Esto es la guerra... ¡¡¡A LA CARGAAAAA!!!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "jsdoc src -d docs"
   },
   "keywords": [],
   "author": "",
