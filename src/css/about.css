@@ -1,0 +1,166 @@
+/* GENERAL */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: black;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+span{
+    font-weight: bold;
+    font-size: 22px;
+}
+
+h2{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+p{
+    color: gainsboro;
+}
+
+section{
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+h1, h2{
+    color: goldenrod;
+}
+
+ul, li{
+    list-style: none;
+}
+
+/* HEADER */
+header{
+    text-align: center;
+}
+
+header #logo{
+    width: 200px;
+}
+
+header h1{
+    font-size: 40px;
+}
+
+header h1:hover{
+    text-shadow: 0px 0px 20px;
+    cursor: pointer;
+}
+
+/* NAV */
+nav{
+    background-color: grey;
+    margin-top: 20px;
+    box-shadow: 0px 0px 20px inset black;
+}
+
+nav a{
+    text-decoration: none;
+    color: gainsboro;
+    font-weight: bold;
+}
+
+nav > ul > li{
+    display: inline-block;
+    text-align: center;
+    padding: 20px;
+}
+
+nav > ul > li:last-child{
+    position: relative;
+}
+
+#submenu{
+    display: none;
+    position: absolute;
+}
+
+nav > ul{
+    text-align: center;
+}
+
+nav > ul > li:last-child:hover > #submenu{
+    display: block;
+    background-color: gray;
+    border-radius: 2px;
+    margin-top: 20px;
+    width: 105px;
+    right: 0%;
+    left: 0%;
+    z-index: 10;
+}
+
+nav > ul > li:last-child:hover > #submenu > li{
+    padding: 10px;
+}
+
+nav > ul > li:last-child:hover > #submenu > li:hover{
+    background-color: goldenrod;
+    box-shadow: 0px 0px 10px;
+}
+
+nav > ul > li:hover{
+    background-color: goldenrod;
+    box-shadow: 0px 0px 10px ;
+}
+
+/* ASIDE HORARIO */
+.horario{
+    width: 30%;
+    float: left;
+    background-color: gray;
+    box-shadow: 0px 0px 10px inset;
+    overflow: auto;
+    padding: 20px;
+    margin-left: 2.5%;
+}
+
+.horario li, .horario p{
+    color: gainsboro;
+    margin-bottom: 10px;
+}
+
+iframe{
+    width: 60%;
+    margin-left: 5%;
+    border-radius: 5px;
+}
+
+/* SECCIÓN COMO LLEGAR */
+.comoLlegar{
+    overflow: auto;
+    padding: 20px;
+}
+
+.comoLlegar p{
+    font-size: 20px;
+}
+
+/* FOOTER */
+footer{
+    clear: both;
+    background-color: gray;
+    text-align: center;
+    padding: 20px;
+    color: gainsboro;
+    font-weight: bold;
+    box-shadow: 0px 0px 20px inset black;
+    margin-top: 100px;
+}
+
+footer a{
+    text-decoration: none;
+    color: goldenrod;
+}
+
+footer a:hover{
+    text-decoration: underline;
+}
