@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="José Manuel Martínez Fernández">
+    <meta name="keywords" content="Susana, más Susana, ¿Susana?">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="icon" href="assets/img/favicon/favicon.ico" type="image/x-icon">
+    <!-- API LEAFLET IMPORTADA -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        .map-container{
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+    <title>Inicio</title>
+</head>
+
+<body>
+    <!-- Inicio header -->
+    <header>
+        <a href="#"><img id="logo" src="assets/img/logo.png" alt="Logotipo"></a>
+        <h1>Gem Shopping</h1>
+    </header>
+    <!-- Fin header -->
+
+    <!-- Inicio nav -->
+    <nav>
+        <ul>
+            <li><a href="../index.html">Inicio</a></li>
+            <li><a href="#">Tiendas</a></li>
+            <li><a href="html/eventos.html">Eventos</a></li>
+            <li><a href="html/contacto.html">Contacto</a>
+                <ul id="submenu">
+                    <li><a href="html/horario.html">Horario</a></li>
+                    <li><a href="html/about.html">Sobre nosotros</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <!-- Fin nav -->
+
+    <!-- Inicio banner -->
+    <div id="banner">
+        <img src="../assets/img/backgroundMarket.jpg" alt="Gem Shopping">
+    </div>
+    <!-- Fin banner -->
+
+    <!-- Inicio main -->
+    <main>
+        <h2><span>NUESTRAS MARCAS</span> TODAS LAS TIENDAS DE TENDENCIA PARA TI</h2>
+
+        <!-- INICIO SECCIÓN MARCAS -->
+        <section class="marcas">
+            <div><a href="https://www.sprintersports.com/"><img src="../assets/img/sprinter.png" alt="Sprinter"></a>
+            </div>
+            <div><a href="https://es.pandora.net/es/"><img src="../assets/img/Pandora_Logo_Blank.jpg" alt="Pandora"></a>
+            </div>
+            <div><a href="https://www.mercadona.es/"><img src="../assets/img/logo-Mercadona.png" alt="Mercadona"></a>
+            </div>
+            <div><a href="https://www.leroymerlin.es/"><img src="../assets/img/leroy merlin.png" alt="Leroy Merlin"></a>
+            </div>
+            <div><a href="https://burgerking.es/home"><img src="../assets/img/Burger_King_2020.svg.png"
+                        alt="Burguer King"></a></div>
+            <div><a href="https://www.jdsports.es/"><img src="../assets/img/JD_Sports_logo.svg.png" alt="JD"></a></div>
+            <div><a href="https://kinepolis.es/?main_section=ya+a+la+venta"><img src="../assets/img/kineplis.jfif"
+                        alt="Kinepolis"></a></div>
+            <div><a href="https://www.fnac.es/"><img src="../assets/img/Fnac_Logo.png" alt="FNAC"></a></div>
+            <div><a href="https://www.deichmann.com/es-es/"><img src="../assets/img/Deichmann_logo.png"
+                        alt="Deichmann"></a></div>
+        </section>
+        <!-- FIN SECCIÓN MARCAS -->
+
+        <!-- INICIO SECCIÓN DE LEAFLET -->
+        <section class="leaflet">
+            <h2>ALGUNAS TIENDAS</h2>
+            <article class="mercadona">
+                <h2>MERCADONA</h2>
+                <hr>
+                <div id="map1" class="map-container"></div>
+
+                <p>Mercadona es una compañía de supermercados, de capital 100% español y familiar. El objetivo es satisfacer
+                    la necesidad de alimentos, higiene personal y hogar de los clientes y las mascotas. Es tu supermercado
+                    de confianza.
+                </p>
+                <ol>
+                    <li><img src="../assets/img/flecha.png" alt="Tienda Mercadona">TIENDA: 1</li>
+                    <li><img src="../assets/img/llamada-telefonica.png" alt="Teléfono Mercadona">958 866 301</li>
+                </ol>
+            </article>
+            <article class="JD">
+                <h2>JD</h2>
+                <hr>
+                <div id="map2" class="map-container"></div>
+
+                <p>Las últimas tendencias en moda urbana te esperan en las tiendas JD de Nevada Shopping.
+
+                    Son espacios donde encontrarás las colecciones más recientes de ropa deportiva y de zapatillas de marcas como Nike, Adidas, Fila, Puma, New Balance, Converse, Vans, Ellesse, Jordan, The North Face, Lacoste o SikSilk.
+                    
+                    Ven a visitarnos y pon al día tu estilo con las sneakers que más se llevan o con lo nuevo en conjuntos de chándal, camisetas, sudaderas, chaquetas y pantalones joggers.</p>
+                <ol>
+                    <li><img src="../assets/img/flecha.png" alt="Tienda JD">TIENDA: 43-44</li>
+                    <li><img src="../assets/img/ubicacion.png" alt="Ubicación JD">PLAZA ALHAMBRA</li>
+                    <li><img src="../assets/img/llamada-telefonica.png" alt="Teléfono JD">958 568 108</li>
+                </ol>
+            </article>
+            <article class="burguerKing">
+                <h2>BURGUER KING</h2>
+                <hr>
+                <div id="map3" class="map-container"></div>
+
+                <p>Nacido en Miami en 1954, cuando dos hombres jóvenes, McLamore James y David Egerton, encontraron una hamburguesa basada en un concepto diferente a la que existía: “Estamos orgullosos de servir a nuestros clientes las mejores hamburguesas y una variedad de otros productos sabrosos y saludables, cocinado con fuego”.</p>
+                <ol>
+                    <li><img src="../assets/img/flecha.png" alt="Tienda Burguer King">TIENDA: 191</li>
+                    <li><img src="../assets/img/llamada-telefonica.png" alt="Teléfono Burguer King">958 887 745</li>
+                </ol>
+            </article>
+        </section>
+        <!-- FIN SECCIÓN DE LEAFLET -->
+    </main>
+    <!-- Fin main -->
+
+    <!-- Inicio footer -->
+    <footer>
+        <p>&copy; Desarrollado por José Manuel</p>
+        <p>Más contenido y tiendas en <a href="https://nevada.shopping/" target="_blank">otros centros como este</a></p>
+    </footer>
+    <!-- Fin footer -->
+
+    <!-- INICIO SCRIPT PARA USAR LA API DE LEAFLET -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Mapa 1
+        var map1 = L.map('map1').setView([37.21311017548976, -3.6149235141018696], 12); // Mercadona
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map1);
+        L.marker([37.21311017548976, -3.6149235141018696]).addTo(map1).bindPopup('Mapa 1: Mercadona');
+
+        // Mapa 2
+        var map2 = L.map('map2').setView([37.17505247806386, -3.5946676697269724], 12); // JD
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map2);
+        L.marker([37.17505247806386, -3.5946676697269724]).addTo(map2).bindPopup('Mapa 2: JD');
+
+        // Mapa 3
+        var map3 = L.map('map3').setView([37.21619736082923, -3.6087439584563494], 12); // Burguer King
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map3);
+        L.marker([37.21619736082923, -3.6087439584563494]).addTo(map3).bindPopup('Mapa 3: Burguer King');
+    </script>
+    <!-- FIN SCRIPT PARA USAR LA API DE LEAFLET -->
+</body>
+
+</html>
