@@ -21,11 +21,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Ensure JSDoc is executable
+        run: chmod +x node_modules/.bin/jsdoc # Esto asegura que jsdoc tenga permisos de ejecución
+
       - name: Generate documentation
         run: npm run docs  # Ejecuta el script que genera la documentación
 
       - name: Upload Documentation
-        uses: actions/upload-artifact@v2 # Acción que crea un artefacto a partir de la documentación
+        uses: actions/upload-artifact@v4 # Acción que crea un artefacto a partir de la documentación
         with:
           name: docs
           path: docs/  # Ruta donde se genera la documentación
@@ -43,11 +46,13 @@ jobs:
         with:
           terraform_version: 1.0.0  # Cambia según la versión de Terraform que desees usar
 
+      # Inicializa y destruye automáticamente (si es que hay) el entorno de Terraform (archivos) 
       - name: Initialize Terraform
-        run: | # Inicializa y destruye automáticamente (si es que hay) el entorno de Terraform (archivos) 
-          terraform init
-          terraform destroy -auto-approve 
-          working-directory: ./terraform 
+        run: terraform init
+        working-directory: ./terraform
+      - name: Destroy before
+        run: terraform destroy -auto-approve
+        working-directory: ./terraform 
 
       - name: Terraform plan
         run: terraform plan
