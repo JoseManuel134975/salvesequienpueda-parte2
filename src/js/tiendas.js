@@ -3,7 +3,7 @@
  * @param {string} idMapa - El ID del contenedor del mapa.
  * @param {Array<number>} coordenadas - Las coordenadas [lat, lng] para centrar el mapa.
  * @param {string} mensajePopup - El texto que aparecerá en el popup del marcador.
- * Comentario extra *2 *3
+ * @param {number}
  */
 function inicializarMapa(idMapa, coordenadas, mensajePopup) {
     var map = L.map(idMapa).setView(coordenadas, 12);
