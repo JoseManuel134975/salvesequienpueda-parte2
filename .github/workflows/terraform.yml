@@ -27,12 +27,6 @@ jobs:
       - name: Generate documentation
         run: npm run docs  # Ejecuta el script que genera la documentación
 
-      - name: Upload Documentation
-        uses: actions/upload-artifact@v4 # Acción que crea un artefacto a partir de la documentación
-        with:
-          name: docs
-          path: docs/  # Ruta donde se genera la documentación
-
       - name: Deploy to GitHub Pages  # Publica en GitHub Pages
         uses: peaceiris/actions-gh-pages@v3 # Publica en la rama gh-pages los archivos del publish_dir (más abajo)
         with:
