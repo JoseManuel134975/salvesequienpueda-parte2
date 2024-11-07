@@ -100,14 +100,14 @@ resource "aws_security_group" "allow_http_and_ssh" {
   ingress {
     from_port = 80
     to_port = 80
-    protocol = "HTTP"
+    protocol = "tcp"
     cidr_blocks = [ "0.0.0.0/0" ] # Desde cualquier lado
   }
 
   ingress {
     from_port = 22
     to_port = 22
-    protocol = "TCP"
+    protocol = "tcp"
     cidr_blocks = [ "0.0.0.0/0" ]
   }
 
