@@ -1,8 +1,9 @@
 #!/bin/bash
-# Actualiza el sistema e instala paquetes necesarios (nginx y git)
+# Actualiza el sistema e instala paquetes necesarios
 sudo yum update -y
 sudo yum install -y nginx
 sudo yum install -y git
+
 # Inicia el servidor web
 sudo systemctl start nginx
 sudo systemctl enable nginx
