@@ -171,6 +171,6 @@ resource "aws_instance" "mi_servidor_web" {
   ami = "ami-06b21ccaeff8cd686" # Se pueden hacer filtros pero también pasarle el ID directamente
   instance_type = "t2.micro" # Capa gratuita de AWS para crear instancias
   subnet_id = aws_subnet.mi_subred_publica.id
-  vpc_security_group_ids = [ aws_security_group.allow_http_and_ssh ]
+  vpc_security_group_ids = [ aws_security_group.allow_http_and_ssh.id ]
   user_data = file("user_data.sh") # Script que se ejecuta al crear la instancia
 }
