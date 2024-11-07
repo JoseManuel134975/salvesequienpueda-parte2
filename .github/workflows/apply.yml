@@ -33,6 +33,12 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}  # Token para autenticación
           publish_dir: ./docs  # Directorio de publicación. Los archivos de documentación se recogen de este directorio
 
+      - name: Download Terraform state artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: terraform-state
+          path: ./terraform/terraform.tfstate  # Colocar el archivo en el directorio actual
+
       - name: Configure AWS Credentials 
         uses: aws-actions/configure-aws-credentials@v4 # Acción para autenticarse en AWS
         with:
@@ -49,6 +55,10 @@ jobs:
       # Inicializa el estado de Terraform 
       - name: Initialize Terraform
         run: terraform init
+        working-directory: ./terraform
+
+      - name: Terraform destroy
+        run: terraform destroy -auto-approve
         working-directory: ./terraform
 
       - name: Terraform plan
