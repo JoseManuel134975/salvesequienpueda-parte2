@@ -34,7 +34,7 @@ jobs:
           publish_dir: ./docs  # Directorio de publicación. Los archivos de documentación se recogen de este directorio
 
       - name: Download Terraform state artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: terraform-state
           path: ./terraform/terraform.tfstate  # Colocar el archivo en el directorio actual

@@ -1,4 +1,4 @@
-name: Destroy old artifacts (Terraform states)
+name: Destroy old state of Terraform
 
 on:
     workflow_dispatch
@@ -9,7 +9,6 @@ jobs:
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
-
 
             - name: Configure AWS Credentials
               uses: aws-actions/configure-aws-credentials@v4 # Acción para autenticarse en AWS
