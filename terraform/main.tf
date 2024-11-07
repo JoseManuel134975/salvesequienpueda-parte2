@@ -93,7 +93,7 @@ resource "aws_vpc" "mi_vpc" {
 
 # Grupo de seguridad
 resource "aws_security_group" "allow_http_and_ssh" {
-  description = "Permite el tráfico HTTP y SSH para acceder a la instancia"
+  description = "Permite el trafico HTTP y SSH para acceder a la instancia"
   vpc_id = aws_vpc.mi_vpc.id # Mediante el ID asociamos
 
   # Reglas de entrada
@@ -155,7 +155,7 @@ resource "aws_route_table" "mi_tabla_de_enrutamiento" {
 
   # Rutas
   route {
-    cidr_block = "10.0.1.0/24"
+    cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.mi_router.id
   }
 }
