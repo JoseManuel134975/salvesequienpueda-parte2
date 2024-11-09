@@ -92,7 +92,7 @@ resource "aws_key_pair" "keys_of_server_nginx" {
 # Instancia (lo bueno)
 resource "aws_instance" "mi_servidor_web" {
   key_name = aws_key_pair.keys_of_server_nginx.key_name
-  ami = "ami-0789039e34e739d67" # Se pueden hacer filtros pero también pasarle el ID directamente
+  ami = "ami-064519b8c76274859" # Se pueden hacer filtros pero también pasarle el ID directamente
   instance_type = "t2.micro" # Capa gratuita de AWS para crear instancias
   subnet_id = aws_subnet.mi_subred_publica.id
   vpc_security_group_ids = [ aws_security_group.allow_http_and_ssh.id ]
