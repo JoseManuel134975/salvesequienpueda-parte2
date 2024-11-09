@@ -6,10 +6,15 @@ provider "aws" {
 # VPC
 resource "aws_vpc" "mi_vpc" {
   cidr_block = "10.0.0.0/16"
+
+  tags = {
+    Name = "vpc-nginx"
+  }
 }
 
 # Grupo de seguridad
 resource "aws_security_group" "allow_http_and_ssh" {
+  name = "allow_http_and_ssh"
   description = "Permite el trafico HTTP y SSH para acceder a la instancia"
   vpc_id = aws_vpc.mi_vpc.id # Mediante el ID asociamos
 
@@ -43,11 +48,19 @@ resource "aws_subnet" "mi_subred_publica" {
   cidr_block = "10.0.1.0/24"
   availability_zone = "us-east-1a"
   map_public_ip_on_launch = true # Se asigna una IP pública automáticamente a las instancias creadas en esta subred
+
+  tags = {
+    Name = "subnet-for-nginx"
+  }
 }
 
 # Router para salir a internet
 resource "aws_internet_gateway" "mi_router" {
   vpc_id = aws_vpc.mi_vpc.id
+
+  tags = {
+    Name = "router-for-nginx"
+  }
 }
 
 # Tabla de enrutamiento
@@ -59,6 +72,10 @@ resource "aws_route_table" "mi_tabla_de_enrutamiento" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.mi_router.id
   }
+
+  tags = {
+    Name = "route_table-for-nginx"
+  }
 }
 
 # Asociación entre tabla de rutas y subred
@@ -67,11 +84,21 @@ resource "aws_route_table_association" "mi_asociacion_de_tabla_de_enrutamiento" 
   subnet_id = aws_subnet.mi_subred_publica.id
 }
 
+resource "aws_key_pair" "keys_of_server_nginx" {
+  key_name = "server-web-nginx"
+  public_key = file("servidor-web-nginx.pub")
+}
+
 # Instancia (lo bueno)
 resource "aws_instance" "mi_servidor_web" {
+  key_name = aws_key_pair.keys_of_server_nginx.key_name
   ami = "ami-06b21ccaeff8cd686" # Se pueden hacer filtros pero también pasarle el ID directamente
   instance_type = "t2.micro" # Capa gratuita de AWS para crear instancias
   subnet_id = aws_subnet.mi_subred_publica.id
   vpc_security_group_ids = [ aws_security_group.allow_http_and_ssh.id ]
   user_data = file("user_data.sh") # Script que se ejecuta al crear la instancia
+
+  tags = {
+    Name = "servidor_nginx_linux_aws"
+  }
 }
