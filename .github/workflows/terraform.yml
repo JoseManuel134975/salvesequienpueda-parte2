@@ -110,7 +110,7 @@ jobs:
           
       - name: Plan for check
         working-directory: ./terraform
-        run: terraform plan -destroy
+        run: terraform plan -destroy 
 
       - name: State list
         working-directory: terraform
