@@ -55,16 +55,19 @@ jobs:
 
       # Inicializa el estado de Terraform
       - name: Initialize Terraform
+        working-directory: ./terraform  
         run: terraform init
-        working-directory: ./terraform
+          
 
       - name: Terraform plan
+        working-directory: ./terraform  
         run: terraform plan
-        working-directory: ./terraform
+          
 
       - name: Terraform apply
+        working-directory: ./terraform  
         run: terraform apply -auto-approve
-        working-directory: ./terraform
+          
 
       # - name: Upload Terraform State
       #   uses: actions/upload-artifact@v4 # Carga como artefacto el estado de Terraform después de sufrir cambios
@@ -97,9 +100,11 @@ jobs:
 
       # Inicializa el estado de Terraform
       - name: Initialize Terraform
+        working-directory: ./terraform  
         run: terraform init
-        working-directory: ./terraform
+          
 
       - name: Destroy Terraform
+        working-directory: ./terraform  
         run: terraform destroy -auto-approve
-        working-directory: ./terraform
+          
