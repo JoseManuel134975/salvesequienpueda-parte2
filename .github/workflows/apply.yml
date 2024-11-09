@@ -3,7 +3,7 @@ name: Generate Documentation & deploy on Terraform/AWS
 on:
   push:
     branches:
-      - main  
+      - main
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
@@ -25,34 +25,30 @@ jobs:
         run: chmod +x node_modules/.bin/jsdoc # Esto asegura que jsdoc tenga permisos de ejecución
 
       - name: Generate documentation
-        run: npm run docs  # Ejecuta el script que genera la documentación
+        run: npm run docs # Ejecuta el script que genera la documentación
 
-      - name: Deploy to GitHub Pages  # Publica en GitHub Pages
+      - name: Deploy to GitHub Pages # Publica en GitHub Pages
         uses: peaceiris/actions-gh-pages@v3 # Publica en la rama gh-pages los archivos del publish_dir (más abajo)
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # Token para autenticación
-          publish_dir: ./docs  # Directorio de publicación. Los archivos de documentación se recogen de este directorio
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Token para autenticación
+          publish_dir: ./docs # Directorio de publicación. Los archivos de documentación se recogen de este directorio
 
-      - name: Configure AWS Credentials 
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4 # Acción para autenticarse en AWS
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} # ID
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # CLAVE PRIVADA
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }} # TOKEN TEMPORAL
           aws-region: "us-east-1" # Región
-            
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1 # Acción para configurar Terraform
         with:
-          terraform_version: 1.0.0  # Cambia según la versión de Terraform que desees usar
+          terraform_version: 1.0.0 # Versión de Terraform
 
-      # Inicializa el estado de Terraform 
+      # Inicializa el estado de Terraform
       - name: Initialize Terraform
         run: terraform init
-        working-directory: ./terraform
-
-      - name: Terraform destroy
-        run: terraform destroy -auto-approve
         working-directory: ./terraform
 
       - name: Terraform plan
@@ -63,8 +59,8 @@ jobs:
         run: terraform apply -auto-approve
         working-directory: ./terraform
 
-      - name: Upload Terraform State
-        uses: actions/upload-artifact@v4 # Carga como artefacto el estado de Terraform después de sufrir cambios
-        with:
-          name: terraform-state
-          path: ./terraform/terraform.tfstate  # Cambia a la ruta correcta
+      # - name: Upload Terraform State
+      #   uses: actions/upload-artifact@v4 # Carga como artefacto el estado de Terraform después de sufrir cambios
+      #   with:
+      #     name: terraform-state
+      #     path: ./terraform/terraform.tfstate # Cambia a la ruta correcta

@@ -166,8 +166,14 @@ resource "aws_route_table_association" "mi_asociacion_de_tabla_de_enrutamiento" 
   subnet_id = aws_subnet.mi_subred_publica.id
 }
 
+resource "aws_key_pair" "keys_of_server_nginx" {
+  key_name = "server-web-nginx"
+  public_key = file("server-web-nginx.pub")
+}
+
 # Instancia (lo bueno)
 resource "aws_instance" "mi_servidor_web" {
+  key_name = aws_key_pair.keys_of_server_nginx.key_name
   ami = "ami-06b21ccaeff8cd686" # Se pueden hacer filtros pero también pasarle el ID directamente
   instance_type = "t2.micro" # Capa gratuita de AWS para crear instancias
   subnet_id = aws_subnet.mi_subred_publica.id
