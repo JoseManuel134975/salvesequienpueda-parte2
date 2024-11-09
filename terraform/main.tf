@@ -168,7 +168,7 @@ resource "aws_route_table_association" "mi_asociacion_de_tabla_de_enrutamiento" 
 
 resource "aws_key_pair" "keys_of_server_nginx" {
   key_name = "server-web-nginx"
-  public_key = file("server-web-nginx.pub")
+  public_key = file("servidor-web-nginx.pub")
 }
 
 # Instancia (lo bueno)
