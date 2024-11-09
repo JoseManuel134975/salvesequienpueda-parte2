@@ -93,6 +93,7 @@ resource "aws_vpc" "mi_vpc" {
 
 # Grupo de seguridad
 resource "aws_security_group" "allow_http_and_ssh" {
+  name = "allow_http_and_ssh"
   description = "Permite el trafico HTTP y SSH para acceder a la instancia"
   vpc_id = aws_vpc.mi_vpc.id # Mediante el ID asociamos
 
