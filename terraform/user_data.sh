@@ -1,9 +1,9 @@
 #!/bin/bash
 # Actualiza el sistema e instala paquetes necesarios
-sudo apt update
-sudo apt install apache2
-sudo apt install php libapache2-mod-php
-sudo apt install git
+sudo apt update -y
+sudo apt install apache2 -y
+sudo apt install php libapache2-mod-php -y
+sudo apt install git -y
 
 # Inicia el servidor web
 sudo systemctl start apache2

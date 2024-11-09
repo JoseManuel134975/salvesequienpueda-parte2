@@ -8,7 +8,7 @@ resource "aws_vpc" "mi_vpc" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-    Name = "vpc-nginx"
+    Name = "vpc-apache"
   }
 }
 
@@ -50,7 +50,7 @@ resource "aws_subnet" "mi_subred_publica" {
   map_public_ip_on_launch = true # Se asigna una IP pública automáticamente a las instancias creadas en esta subred
 
   tags = {
-    Name = "subnet-for-nginx"
+    Name = "subnet-for-apache"
   }
 }
 
@@ -59,7 +59,7 @@ resource "aws_internet_gateway" "mi_router" {
   vpc_id = aws_vpc.mi_vpc.id
 
   tags = {
-    Name = "router-for-nginx"
+    Name = "router-for-apache"
   }
 }
 
@@ -74,7 +74,7 @@ resource "aws_route_table" "mi_tabla_de_enrutamiento" {
   }
 
   tags = {
-    Name = "route_table-for-nginx"
+    Name = "route_table-for-apache"
   }
 }
 
@@ -84,14 +84,14 @@ resource "aws_route_table_association" "mi_asociacion_de_tabla_de_enrutamiento" 
   subnet_id = aws_subnet.mi_subred_publica.id
 }
 
-resource "aws_key_pair" "keys_of_server_nginx" {
-  key_name = "server-web-nginx"
-  public_key = file("servidor-web-nginx.pub")
+resource "aws_key_pair" "keys_of_server_apache" {
+  key_name = "server-web-apache"
+  public_key = file("servidor-web-apache.pub")
 }
 
 # Instancia (lo bueno)
 resource "aws_instance" "mi_servidor_web" {
-  key_name = aws_key_pair.keys_of_server_nginx.key_name 
+  key_name = aws_key_pair.keys_of_server_apache.key_name 
   ami = "ami-064519b8c76274859" # Se pueden hacer filtros pero también pasarle el ID directamente
   instance_type = "t2.micro" # Capa gratuita de AWS para crear instancias
   subnet_id = aws_subnet.mi_subred_publica.id
@@ -99,6 +99,6 @@ resource "aws_instance" "mi_servidor_web" {
   user_data = file("user_data.sh") # Script que se ejecuta al crear la instancia
 
   tags = {
-    Name = "servidor_nginx_linux_aws"
+    Name = "servidor_apache_debian_aws"
   }
 }
