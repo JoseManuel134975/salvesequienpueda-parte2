@@ -113,7 +113,6 @@ jobs:
         run: terraform plan -destroy 
 
       - name: State list
-        working-directory: terraform
         run: terraform state list
 
       - name: Destroy Terraform
