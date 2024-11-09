@@ -112,6 +112,10 @@ jobs:
         working-directory: ./terraform
         run: terraform plan -destroy
 
+      - name: State list
+        working-directory: ./terraform
+        run: terraform state list
+
       - name: Destroy Terraform
         working-directory: ./terraform  
         run: terraform destroy -auto-approve
