@@ -72,34 +72,34 @@ jobs:
       #     name: terraform-state
       #     path: ./terraform/terraform.tfstate # Cambia a la ruta correcta
 
-    destroy:
-      
-      runs-on: ubuntu-latest
-      env:
-        aws_region: us-east-1
+  destroy:
+    
+    runs-on: ubuntu-latest
+    env:
+      aws_region: us-east-1
 
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
-          
-        - name: Configure AWS Credentials
-          uses: aws-actions/configure-aws-credentials@v4 # Acción para autenticarse en AWS
-          with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} # ID
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # CLAVE PRIVADA
-            aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }} # TOKEN TEMPORAL
-            aws-region: ${{ env.aws_region }} # Región
-  
-        - name: Set up Terraform
-          uses: hashicorp/setup-terraform@v1 # Acción para configurar Terraform
-          with:
-            terraform_version: 1.0.0 # Versión de Terraform
-  
-        # Inicializa el estado de Terraform
-        - name: Initialize Terraform
-          run: terraform init
-          working-directory: ./terraform
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4 # Acción para autenticarse en AWS
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} # ID
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # CLAVE PRIVADA
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }} # TOKEN TEMPORAL
+          aws-region: ${{ env.aws_region }} # Región
 
-        - name: Destroy Terraform
-          run: terraform destroy --auto-aprove
-          working-directory: ./terraform
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1 # Acción para configurar Terraform
+        with:
+          terraform_version: 1.0.0 # Versión de Terraform
+
+      # Inicializa el estado de Terraform
+      - name: Initialize Terraform
+        run: terraform init
+        working-directory: ./terraform
+
+      - name: Destroy Terraform
+        run: terraform destroy --auto-aprove
+        working-directory: ./terraform
