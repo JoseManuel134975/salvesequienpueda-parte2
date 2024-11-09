@@ -1,12 +1,12 @@
 name: Generate Documentation & deploy on Terraform/AWS
 
-# on:
-#   push:
-#     branches:
-#       - main
-
 on:
-  workflow_dispatch
+  push:
+    branches:
+      - main
+
+# on:
+#   workflow_dispatch
 
 jobs:
   build:
