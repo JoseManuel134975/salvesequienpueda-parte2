@@ -2,6 +2,7 @@ SSH:
 
 Generar clave pública a partir de la privada -> ssh-keygen -y -f nombre_de_tu_clave_privada.pem > nombre_de_tu_clave_publica.pub
 Conectarse a la instancia mediante SSH (si queremos comprobar que todo haya ido bien) -> ssh -i "ruta\a\tu\clave_privada.pem" usuario@direccion-ip
+Generar documentación con el comando npx: npx jsdoc <RUTA_ENTRADA> -d <RUTA_SALIDA> >> # ¡ESTO EN CMD!
 
 ¡IMPORTANTE!
 Dar clave pública en main.tf
