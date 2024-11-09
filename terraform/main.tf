@@ -89,6 +89,10 @@ provider "aws" {
 # VPC
 resource "aws_vpc" "mi_vpc" {
   cidr_block = "10.0.0.0/16"
+
+  tags = {
+    name = "vpc-nginx"
+  }
 }
 
 # Grupo de seguridad
@@ -143,11 +147,19 @@ resource "aws_subnet" "mi_subred_publica" {
   cidr_block = "10.0.1.0/24"
   availability_zone = "us-east-1a"
   map_public_ip_on_launch = true # Se asigna una IP pública automáticamente a las instancias creadas en esta subred
+
+  tags = {
+    name = "subnet-for-nginx"
+  }
 }
 
 # Router para salir a internet
 resource "aws_internet_gateway" "mi_router" {
   vpc_id = aws_vpc.mi_vpc.id
+
+  tags = {
+    name = "router-for-nginx"
+  }
 }
 
 # Tabla de enrutamiento
@@ -158,6 +170,10 @@ resource "aws_route_table" "mi_tabla_de_enrutamiento" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.mi_router.id
+  }
+
+  tags = {
+    name = "route_table-for-nginx"
   }
 }
 
@@ -180,4 +196,8 @@ resource "aws_instance" "mi_servidor_web" {
   subnet_id = aws_subnet.mi_subred_publica.id
   vpc_security_group_ids = [ aws_security_group.allow_http_and_ssh.id ]
   user_data = file("user_data.sh") # Script que se ejecuta al crear la instancia
+  
+  tags = {
+    name = "servidor_nginx_linux_aws"
+  }
 }
