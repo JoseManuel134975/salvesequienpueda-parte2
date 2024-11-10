@@ -73,7 +73,7 @@ jobs:
 
       - name: Terraform apply
         working-directory: ./terraform  
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve # Auto-approve para que no pida ninguna confirmación***
           
 
       # - name: Upload Terraform State

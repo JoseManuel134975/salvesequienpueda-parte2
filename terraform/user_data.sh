@@ -15,7 +15,7 @@ sudo mkdir -p /var/www/html
 # Clona tu repositorio en un directorio temporal
 sudo git clone https://github.com/JoseManuel134975/salvesequienpueda-parte2.git /tmp/mi_proyecto
 
-# Crear el archivo PHP
+# Crear el archivo PHP. Lo hice con un echo porque no tenía tiempo de meter PHP.
 sudo echo "<?php phpinfo(); ?>" > /tmp/mi_proyecto/src/index.php
 
 # Copia los archivos de src a /usr/share/nginx/html
