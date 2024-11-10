@@ -1,4 +1,4 @@
-name: Generate Documentation & deploy on Terraform/AWS
+name: Generate Documentation & deploy/destroy on Terraform/AWS
 
 # on:
 #   push:
@@ -8,7 +8,7 @@ name: Generate Documentation & deploy on Terraform/AWS
 on:
   workflow_dispatch:
 
-    inputs:
+    inputs: # Podemos elegir si queremos un job u otro
       job:
         description: 'Choose a job'
         required: true
@@ -23,7 +23,7 @@ jobs:
     if: ${{ github.event.inputs.job == 'deploy' }}
     runs-on: ubuntu-latest
     env:
-      aws_region: us-east-1
+      aws_region: us-east-1 # Variable de entorno en GitHub Action 
 
     steps:
       - name: Checkout repository
@@ -108,14 +108,6 @@ jobs:
         working-directory: ./terraform  
         run: terraform init
           
-      - name: Plan for check
-        working-directory: ./terraform
-        run: terraform plan -destroy 
-
-      - name: State list
-        run: terraform state list
-
       - name: Destroy Terraform
         working-directory: ./terraform  
         run: terraform destroy -auto-approve
-          
