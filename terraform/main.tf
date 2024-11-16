@@ -84,21 +84,41 @@ resource "aws_route_table_association" "mi_asociacion_de_tabla_de_enrutamiento" 
   subnet_id = aws_subnet.mi_subred_publica.id
 }
 
+resource "aws_key_pair" "keys_of_server_nginx" {
+  key_name = "server-web-nginx"
+  public_key = file("servidor-web-nginx.pub")
+}
+
 resource "aws_key_pair" "keys_of_server_apache" {
   key_name = "server-web-apache"
   public_key = file("servidor-web-apache.pub")
 }
 
-# Instancia (lo bueno)
-resource "aws_instance" "mi_servidor_web" {
+# Instancias (lo bueno)
+# Amazon Linux
+resource "aws_instance" "mi_servidor_web_amazonLinux" {
+  key_name = aws_key_pair.keys_of_server_nginx.key_name 
+  ami = "ami-0166fe664262f664c" # Se pueden hacer filtros pero también pasarle el ID directamente
+  instance_type = "t2.micro" # Capa gratuita de AWS para crear instancias
+  subnet_id = aws_subnet.mi_subred_publica.id
+  vpc_security_group_ids = [ aws_security_group.allow_http_and_ssh.id ]
+  user_data = file("user_data_amazonLinux.sh") # Script que se ejecuta al crear la instancia
+
+  tags = {
+    Name = "servidor_apache_amazonLinux_aws"
+  }
+}
+
+# Debian
+resource "aws_instance" "mi_servidor_web_debian" {
   key_name = aws_key_pair.keys_of_server_apache.key_name 
   ami = "ami-064519b8c76274859" # Se pueden hacer filtros pero también pasarle el ID directamente
   instance_type = "t2.micro" # Capa gratuita de AWS para crear instancias
   subnet_id = aws_subnet.mi_subred_publica.id
   vpc_security_group_ids = [ aws_security_group.allow_http_and_ssh.id ]
-  user_data = file("user_data.sh") # Script que se ejecuta al crear la instancia
+  user_data = file("user_data_debian.sh") # Script que se ejecuta al crear la instancia
 
   tags = {
-    Name = "servidor_apache_debian_aws"
+    Name = "servidor_nginx_debian_aws"
   }
 }
