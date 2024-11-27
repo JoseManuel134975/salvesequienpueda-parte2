@@ -22,13 +22,19 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
     Version = "2012-10-17"
     Statement = [
       {
+        Sid       = "PublicReadGetObject"
         Effect    = "Allow"
-        Action    = "s3:GetObject"
         Principal = "*"
-        Resource  = "${aws_s3_bucket.s3.arn}/*"  # Permite acceso público de lectura
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject"
+        ]
+        Resource = "${aws_s3_bucket.s3.arn}/*"
       }
     ]
   })
+
+  depends_on = [aws_s3_bucket_public_access_block.bucket_public_block]
 }
 
 # Configuración del sitio web estático
@@ -42,7 +48,7 @@ resource "aws_s3_bucket_website_configuration" "index_of_bucket" {
 
 # Subida de archivos al bucket
 data "local_file" "web_files" {
-  for_each = fileset("../src", "**")            # Itera sobre todos los archivos en la carpeta `web`
+  for_each = fileset("../src", "**")            # Itera sobre todos los archivos en la carpeta `src`
   filename = "${abspath("../src")}/${each.key}" # Obtiene la ruta completa del archivo
 }
 
