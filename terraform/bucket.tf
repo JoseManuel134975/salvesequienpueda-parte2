@@ -1,6 +1,6 @@
 # Bucket principal para el sitio web
 resource "aws_s3_bucket" "s3" {
-  bucket        = "bucketJoseManuel"
+  bucket        = "bucket-jose-manuel"
   force_destroy = true # Elimina el bucket y su contenido si es destruido
 }
 
