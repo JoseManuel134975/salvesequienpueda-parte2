@@ -77,8 +77,8 @@ jobs:
       #     name: terraform-state
       #     path: ./terraform/terraform.tfstate # Cambia a la ruta correcta
 
-      - name: Subir estado de Terraform a S3
-        run: aws s3 cp terraform/terraform.tfstate s3://bucket-jose-manuel/terraform.tfstate
+      - name: Upload terraform-state to S3
+        run: aws s3 cp terraform/terraform.tfstate s3://bucket-jose-manuel/terraform.tfstate # Copia el tf.state creado en Ubuntu al bucket desde AWS CLI
 
   destroy:
     if: ${{ github.event.inputs.job == 'destroy' }}
@@ -109,7 +109,7 @@ jobs:
 
       - name: Descargar estado de Terraform
         run: |
-          aws s3 cp s3://bucket-jose-manuel/terraform.tfstate terraform/terraform.tfstate
+          aws s3 cp s3://bucket-jose-manuel/terraform.tfstate terraform/terraform.tfstate # Lo mismo pero al revés
 
       # Inicializa el estado de Terraform
       - name: Initialize Terraform
