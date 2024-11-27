@@ -8,7 +8,7 @@ resource "aws_vpc" "mi_vpc" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-    Name = "vpc-apache"
+    Name = "vpc-nginx"
   }
 }
 
@@ -50,7 +50,7 @@ resource "aws_subnet" "mi_subred_publica" {
   map_public_ip_on_launch = true # Se asigna una IP pública automáticamente a las instancias creadas en esta subred
 
   tags = {
-    Name = "subnet-for-apache"
+    Name = "subnet-for-nginx"
   }
 }
 
@@ -59,7 +59,7 @@ resource "aws_internet_gateway" "mi_router" {
   vpc_id = aws_vpc.mi_vpc.id
 
   tags = {
-    Name = "router-for-apache"
+    Name = "router-for-nginx"
   }
 }
 
@@ -74,7 +74,7 @@ resource "aws_route_table" "mi_tabla_de_enrutamiento" {
   }
 
   tags = {
-    Name = "route_table-for-apache"
+    Name = "route_table-for-nginx"
   }
 }
 
@@ -89,9 +89,9 @@ resource "aws_key_pair" "keys_of_server_nginx" {
   public_key = file("servidor-web-nginx.pub")
 }
 
-# resource "aws_key_pair" "keys_of_server_apache" {
-#   key_name = "server-web-apache"
-#   public_key = file("servidor-web-apache.pub")
+# resource "aws_key_pair" "keys_of_server_nginx" {
+#   key_name = "server-web-nginx"
+#   public_key = file("servidor-web-nginx.pub")
 # }
 
 # Instancias (lo bueno)
@@ -105,7 +105,7 @@ resource "aws_key_pair" "keys_of_server_nginx" {
 #   user_data = file("user_data_amazonLinux.sh") # Script que se ejecuta al crear la instancia
 
 #   tags = {
-#     Name = "servidor_apache_amazonLinux_aws"
+#     Name = "servidor_nginx_amazonLinux_aws"
 #   }
 # }
 
