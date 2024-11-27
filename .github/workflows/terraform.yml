@@ -7,10 +7,9 @@ name: Generate Documentation & deploy/destroy on Terraform/AWS
 
 on:
   workflow_dispatch:
-
     inputs: # Podemos elegir si queremos un job u otro
       job:
-        description: 'Choose a job'
+        description: "Choose a job"
         required: true
         type: choice
         options:
@@ -18,12 +17,11 @@ on:
           - destroy
 
 jobs:
-
   deploy:
     if: ${{ github.event.inputs.job == 'deploy' }}
     runs-on: ubuntu-latest
     env:
-      aws_region: us-east-1 # Variable de entorno en GitHub Action 
+      aws_region: us-east-1 # Variable de entorno en GitHub Action
 
     steps:
       - name: Checkout repository
@@ -62,24 +60,25 @@ jobs:
 
       # Inicializa el estado de Terraform
       - name: Initialize Terraform
-        working-directory: ./terraform  
+        working-directory: ./terraform
         run: terraform init
-          
 
       - name: Terraform plan
-        working-directory: ./terraform  
+        working-directory: ./terraform
         run: terraform plan
-          
 
       - name: Terraform apply
-        working-directory: ./terraform  
+        working-directory: ./terraform
         run: terraform apply -auto-approve # Auto-approve para que no pida ninguna confirmación***
-          
-      - name: Upload Terraform State
-        uses: actions/upload-artifact@v4 # Carga como artefacto el estado de Terraform después de sufrir cambios
-        with:
-          name: terraform-state
-          path: ./terraform/terraform.tfstate # Cambia a la ruta correcta
+
+      # - name: Upload Terraform State
+      #   uses: actions/upload-artifact@v4.4.3 # Carga como artefacto el estado de Terraform después de sufrir cambios
+      #   with:
+      #     name: terraform-state
+      #     path: ./terraform/terraform.tfstate # Cambia a la ruta correcta
+
+      - name: Subir estado de Terraform a S3
+        run: aws s3 cp terraform/terraform.tfstate s3://bucket-jose-manuel/terraform.tfstate
 
   destroy:
     if: ${{ github.event.inputs.job == 'destroy' }}
@@ -91,12 +90,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Descargar tfstate como artefacto
-        uses: actions/download-artifact@v4
-        with:
-          name: terraform-state
-          path: ./
-        
+      # - name: Descargar tfstate como artefacto
+      #   uses: actions/download-artifact@v4.1.8
+      #   with:
+      #     name: terraform-state
+      #     path: ./
+
+      - name: Descargar estado de Terraform
+        run: |
+          aws s3 cp s3://bucket-jose-manuel/terraform.tfstate terraform/terraform.tfstate
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4 # Acción para autenticarse en AWS
         with:
@@ -110,9 +113,9 @@ jobs:
 
       # Inicializa el estado de Terraform
       - name: Initialize Terraform
-        working-directory: ./terraform  
+        working-directory: ./terraform
         run: terraform init
-          
+
       - name: Destroy Terraform
-        working-directory: ./terraform  
+        working-directory: ./terraform
         run: terraform destroy -auto-approve
