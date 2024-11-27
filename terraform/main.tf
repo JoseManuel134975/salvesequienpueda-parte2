@@ -1,7 +1,7 @@
 # Proveedor
-provider "aws" {
-  region = var.region # Variable definida en variables.tf y asignada en terraform.tfvars
-}
+# provider "aws" {
+#   region = var.region # Variable definida en variables.tf y asignada en terraform.tfvars
+# }
 
 # VPC
 resource "aws_vpc" "mi_vpc" {
