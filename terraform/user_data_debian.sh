@@ -2,7 +2,6 @@
 # Actualiza el sistema e instala paquetes necesarios
 sudo apt update -y
 sudo apt install nginx -y
-# sudo apt install php libnginx-mod-php -y
 sudo apt install git -y
 
 # Inicia el servidor web
@@ -14,9 +13,6 @@ sudo mkdir -p /usr/share/nginx/html/
 
 # Clona tu repositorio en un directorio temporal
 sudo git clone https://github.com/JoseManuel134975/salvesequienpueda-parte2.git /tmp/mi_proyecto
-
-# # Crear el archivo PHP. Lo hice con un echo porque no tenía tiempo de meter PHP.
-# sudo echo "<?php phpinfo(); ?>" > /tmp/mi_proyecto/src/index.php
 
 # Copia los archivos de src a /usr/share/nginx/html
 sudo cp -r /tmp/mi_proyecto/src/* /usr/share/nginx/html/
