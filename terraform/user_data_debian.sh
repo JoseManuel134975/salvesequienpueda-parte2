@@ -34,7 +34,7 @@ sudo sed -i 's|root /var/www/html|root /var/www/otro|' /etc/nginx/sites-availabl
 sudo systemctl restart nginx
 
 # 3-
-sudo sed -i 's|listen 80|listen 2512|' /etc/nginx/sites-available/default
+sudo sed -i 's|listen 80|listen 7667|' /etc/nginx/sites-available/default
 sudo systemctl restart nginx
 
 # 4-
@@ -89,14 +89,6 @@ sudo sed -i '/listen \[::\]:80 default_server;/a\    error_page 404 /error_pages
 sudo systemctl restart nginx
 
 # 7- 
-sudo sed -i '/http {/i \
-map \$http_accept_language \$lang {\
-    default "en";\
-    "~^es" "es";\
-    "~^en" "en";\
-}\
-' /etc/nginx/nginx.conf
-
 sudo sed -i '/http {/a \
     map \$http_accept_language \$lang {\n\
         default "en";\
@@ -115,6 +107,7 @@ sudo sed -i 's|root /var/www/otro|root /var/www/otromas|' /etc/nginx/sites-avail
 sudo mkdir /var/www/otromas
 sudo mkdir /var/www/otromas/en
 sudo touch /var/www/otromas/en/index.html
+sudo cp -r /error_pages /var/www/otromas/
 sudo echo '<!DOCTYPE html>
 <html lang="en">
 <head>
