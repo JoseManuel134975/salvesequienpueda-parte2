@@ -24,8 +24,9 @@ sudo rm -rf /tmp/mi_proyecto
 # Y cambia los permisos por si acaso hay problemas
 sudo chown -R nginx:nginx /var/www/html
 sudo chmod -R 755 /var/www/html
-
-
+sudo chown -R nginx:nginx /var/www/otro
+sudo chmod -R 755 /var/www/otro
+sudo cp -r /tmp/mi_proyecto/src/* /var/www/otro
 
 # Puntos:
 # 2-
@@ -95,11 +96,20 @@ map \$http_accept_language \$lang {\
     "~^en" "en";\
 }\
 ' /etc/nginx/nginx.conf
+
+sudo sed -i '/http {/a \
+    map \$http_accept_language \$lang {\n\
+        default "en";\
+        "~^es" "es";\
+        "~^en" "en";\
+    }\
+' /etc/nginx/nginx.conf
+
 sudo sed -i '/location \/ {/,/}/s|try_files $uri $uri/ =404;|try_files /$lang/index.html /index.html;|' /etc/nginx/sites-available/default
 sudo systemctl restart nginx
 
 # 8
-sudo cp /etc/nginx/sites-available/default otrositio
+sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/otrositio
 # Se le cambia, por ejemplo la ruta para que nos lleve a otro index.html*
 sudo sed -i 's|root /var/www/otro|root /var/www/otromas|' /etc/nginx/sites-available/otrositio
 sudo mkdir /var/www/otromas
