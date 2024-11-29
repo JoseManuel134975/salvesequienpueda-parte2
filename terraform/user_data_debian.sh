@@ -113,7 +113,8 @@ sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/otrositio
 # Se le cambia, por ejemplo la ruta para que nos lleve a otro index.html*
 sudo sed -i 's|root /var/www/otro|root /var/www/otromas|' /etc/nginx/sites-available/otrositio
 sudo mkdir /var/www/otromas
-sudo touch /var/www/otromas/index.html
+sudo mkdir /var/www/otromas/en
+sudo touch /var/www/otromas/en/index.html
 sudo echo '<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -122,9 +123,23 @@ sudo echo '<!DOCTYPE html>
     <title>Document</title>
 </head>
 <body>
+    <h1>¡HELLO!</h1>
+</body>
+</html>' > /var/www/otromas/en/index.html
+
+sudo mkdir /var/www/otromas/es
+sudo touch /var/www/otromas/es/index.html
+sudo echo '<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
     <h1>¡HOLA!</h1>
 </body>
-</html>' > /var/www/otromas/index.html
+</html>' > /var/www/otromas/es/index.html
 # Habilita el sitio con un enlace simbólico
 sudo ln -s /etc/nginx/sites-available/otrositio /etc/nginx/sites-enabled/
 # Desabilita el sitio por defecto (no quería comerme la cabeza)
