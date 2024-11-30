@@ -33,7 +33,7 @@ jobs:
         with:
           version: 9.6
           bootstrap: vendor/autoload.php
-          configuration: /phpunit.xml
+          configuration: tests/phpunit.xml
           args: --coverage-text
 
       # - name: Run PHPUnit from a subdirectory
