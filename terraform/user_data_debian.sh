@@ -6,7 +6,7 @@ sudo apt install git -y
 sudo apt install apache2-utils -y
 
 # Inicia el servidor web
-sudo systemctl start nginx
+# sudo systemctl start nginx
 sudo systemctl enable nginx
 
 # Crea el directorio donde se alojará la web si no existe
@@ -31,15 +31,12 @@ sudo cp -r /tmp/mi_proyecto/src/* /var/www/otro
 # Puntos:
 # 2-
 sudo sed -i 's|root /var/www/html|root /var/www/otro|' /etc/nginx/sites-available/default
-sudo systemctl restart nginx
 
 # 3-
 sudo sed -i 's|listen 80|listen 7667|' /etc/nginx/sites-available/default
-sudo systemctl restart nginx
 
 # 4-
 sudo sed -i '/location \/ {/a\    autoindex on;' /etc/nginx/sites-available/default
-sudo systemctl restart nginx
 
 # 5- Redireccionar a HTTPS. Hay variantes para una URL específica y demás. Está comentado porque todavía no tenemos certificados***
 #sudo sed -i '/listen \[::\]:80 default_server;/a\    return 301 https://$host$request_uri;' /etc/nginx/sites-available/default
@@ -86,7 +83,6 @@ sudo echo '<!DOCTYPE html>
 </html>' | sudo tee /error_pages/404.html > /dev/null
 
 sudo sed -i '/listen \[::\]:80 default_server;/a\    error_page 404 /error_pages/404.html;' /etc/nginx/sites-available/default
-sudo systemctl restart nginx
 
 # 7- 
 sudo sed -i '/http {/a \
@@ -98,7 +94,6 @@ sudo sed -i '/http {/a \
 ' /etc/nginx/nginx.conf
 
 sudo sed -i '/location \/ {/,/}/s|try_files $uri $uri/ =404;|try_files /$lang/index.html /index.html;|' /etc/nginx/sites-available/default
-sudo systemctl restart nginx
 
 # 8
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/otrositio
@@ -137,10 +132,9 @@ sudo echo '<!DOCTYPE html>
 sudo ln -s /etc/nginx/sites-available/otrositio /etc/nginx/sites-enabled/
 # Desabilita el sitio por defecto (no quería comerme la cabeza)
 sudo rm /etc/nginx/sites-enabled/default
-sudo systemctl restart nginx
 
 # 9
 sudo htpasswd -cb /etc/nginx/.htpasswd usuario usuario
 sudo sed -i '/location \/ {/a\    auth_basic "Área Restringida";\n    auth_basic_user_file /etc/nginx/.htpasswd;' /etc/nginx/sites-available/otrositio
-sudo systemctl restart nginx
+
 sudo systemctl start nginx
