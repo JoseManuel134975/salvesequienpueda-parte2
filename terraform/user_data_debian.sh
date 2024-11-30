@@ -138,4 +138,4 @@ sudo htpasswd -cb /etc/nginx/.htpasswd usuario usuario
 sudo sed -i '/location \/ {/a\    auth_basic "Área Restringida";\n    auth_basic_user_file /etc/nginx/.htpasswd;' /etc/nginx/sites-available/otrositio
 
 sudo systemctl start nginx
-sudo systemctl restart nginx
+sudo systemctl restart nginx 
