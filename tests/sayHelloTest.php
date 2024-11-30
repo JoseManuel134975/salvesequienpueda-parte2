@@ -2,7 +2,7 @@
 use PHPUnit\Framework\TestCase;
 
 // Incluir el archivo donde se define la función
-require_once 'path/to/your/function/file.php'; // Ajusta esta ruta según tu estructura de archivos
+require_once './src/php/sayHello.php'; // Ajusta esta ruta según tu estructura de archivos
 
 class SayHelloTest extends TestCase
 {
