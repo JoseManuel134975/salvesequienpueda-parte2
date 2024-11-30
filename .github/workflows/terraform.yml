@@ -15,8 +15,26 @@ on:
         options:
           - deploy
           - destroy
+          - phpunit
 
 jobs:
+  phpunit:
+    if: ${{ github.event.inputs.job == 'phpunit' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+
+      - name: Run PHPUnit
+        uses: php-actions/phpunit@v3
+
+      - name: Run PHPUnit from a subdirectory
+        run: ./vendor/bin/phpunit --testdox
+        working-directory: ./src/php
+
   deploy:
     if: ${{ github.event.inputs.job == 'deploy' }}
     runs-on: ubuntu-latest
