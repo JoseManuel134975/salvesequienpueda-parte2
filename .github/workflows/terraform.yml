@@ -22,23 +22,20 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install dependencies
-        uses: php-actions/composer@v6
+        uses: php-actions/composer@v6 # Instala dependencias necesarias
 
       - name: Run PHPUnit
-        uses: php-actions/phpunit@v3
+        uses: php-actions/phpunit@v3 # Ejecuta PHPUnit
         with:
           version: 9.6
           bootstrap: vendor/autoload.php
           configuration: phpunit.xml
           args: --coverage-text
 
-      # - name: Run PHPUnit from a subdirectory
-      #   run: ./vendor/bin/phpunit --testdox
-      #   working-directory: ./src/php
-
   deploy:
     runs-on: ubuntu-latest
-    needs: phpunit
+    needs: phpunit # Necesita conocer el anterior job (truco del almendruco)
+    # Y comprueba que se ha ejecutado correctamente
     if: ${{ success() }}
 
     env:
@@ -94,36 +91,3 @@ jobs:
 
       - name: Upload terraform-state to S3
         run: aws s3 cp terraform/terraform.tfstate s3://bucket-jose-manuel/terraform.tfstate # Copia el tf.state creado en Ubuntu al bucket desde AWS CLI
-
-  destroy:
-    runs-on: ubuntu-latest
-    env:
-      aws_region: us-east-1
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4 # Acción para autenticarse en AWS
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} # ID
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # CLAVE PRIVADA
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }} # TOKEN TEMPORAL
-          aws-region: ${{ env.aws_region }} # Región
-
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v3 # Acción para configurar Terraform
-
-      - name: Descargar estado de Terraform
-        run: |
-          aws s3 cp s3://bucket-jose-manuel/terraform.tfstate terraform/terraform.tfstate # Lo mismo pero al revés
-
-      # Inicializa el estado de Terraform
-      - name: Initialize Terraform
-        working-directory: ./terraform
-        run: terraform init
-
-      - name: Destroy Terraform
-        working-directory: ./terraform
-        run: terraform destroy -auto-approve
