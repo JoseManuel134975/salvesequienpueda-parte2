@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php" colors="true" verbose="true">
+    <testsuites>
+        <testsuite name="Application Test Suite">
+            <!-- Agrega los directorios o archivos de prueba que deseas ejecutar -->
+            <directory>./tests</directory> <!-- Asume que tus pruebas están en la carpeta "tests" -->
+        </testsuite>
+    </testsuites>
+
+    <coverage>
+        <include>
+            <directory suffix=".php">./src</directory> <!-- Ajusta esto a donde esté tu código -->
+        </include>
+    </coverage>
+
+    <php>
+        <!-- Puedes establecer variables de entorno aquí -->
+        <env name="APP_ENV" value="testing"/>
+    </php>
+</phpunit>
