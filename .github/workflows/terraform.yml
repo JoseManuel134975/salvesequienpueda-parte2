@@ -13,13 +13,12 @@ on:
         required: true
         type: choice
         options:
-          - deploy
+          # - deploy
           - destroy
-          - phpunit
+          # - phpunit
 
 jobs:
   phpunit:
-    if: ${{ github.event.inputs.job == 'phpunit' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -41,7 +40,7 @@ jobs:
       #   working-directory: ./src/php
 
   deploy:
-    if: ${{ github.event.inputs.job == 'deploy' }}
+    if: ${{ success() }} 
     runs-on: ubuntu-latest
     env:
       aws_region: us-east-1 # Variable de entorno en GitHub Action
