@@ -7,15 +7,15 @@ name: Generate Documentation & deploy/destroy on Terraform/AWS
 
 on:
   workflow_dispatch:
-    inputs: # Podemos elegir si queremos un job u otro
-      job:
-        description: "Choose a job"
-        required: true
-        type: choice
-        options:
-          # - deploy
-          - destroy
-          # - phpunit
+    # inputs: # Podemos elegir si queremos un job u otro
+    #   job:
+    #     description: "Choose a job"
+    #     required: true
+    #     type: choice
+    #     options:
+    #       # - deploy
+    #       - destroy
+    #       # - phpunit
 
 jobs:
   phpunit:
@@ -103,7 +103,6 @@ jobs:
         run: aws s3 cp terraform/terraform.tfstate s3://bucket-jose-manuel/terraform.tfstate # Copia el tf.state creado en Ubuntu al bucket desde AWS CLI
 
   destroy:
-    if: ${{ github.event.inputs.job == 'destroy' }}
     runs-on: ubuntu-latest
     env:
       aws_region: us-east-1
