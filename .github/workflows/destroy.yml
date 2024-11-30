@@ -1,0 +1,47 @@
+name: Destroy Terraform
+
+on:
+  workflow_dispatch:
+    inputs: # Podemos elegir si queremos un job u otro
+      job:
+        description: "Choose a job"
+        required: true
+        type: choice
+        options:
+          # - deploy
+          - destroy
+          # - phpunit
+
+jobs:
+  destroy:
+    runs-on: ubuntu-latest
+    env:
+      aws_region: us-east-1
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4 # Acción para autenticarse en AWS
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} # ID
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # CLAVE PRIVADA
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }} # TOKEN TEMPORAL
+          aws-region: ${{ env.aws_region }} # Región
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3 # Acción para configurar Terraform
+
+      - name: Descargar estado de Terraform
+        run: |
+          aws s3 cp s3://bucket-jose-manuel/terraform.tfstate terraform/terraform.tfstate # Lo mismo pero al revés
+
+      # Inicializa el estado de Terraform
+      - name: Initialize Terraform
+        working-directory: ./terraform
+        run: terraform init
+
+      - name: Destroy Terraform
+        working-directory: ./terraform
+        run: terraform destroy -auto-approve

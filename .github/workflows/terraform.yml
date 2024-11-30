@@ -1,24 +1,18 @@
-name: Generate Documentation & deploy/destroy on Terraform/AWS
-
-# on:
-#   push:
-#     branches:
-#       - main
+name: Generate JSDoc Documentation, deploy Terraform & test with PHPUnit
 
 on:
-  push:
-    branches:
-      - main
-  # workflow_dispatch:
-    # inputs: # Podemos elegir si queremos un job u otro
-    #   job:
-    #     description: "Choose a job"
-    #     required: true
-    #     type: choice
-    #     options:
-    #       # - deploy
-    #       - destroy
-    #       # - phpunit
+  # push:
+  #   branches:
+  #     - main
+  workflow_dispatch:
+    inputs: # Podemos elegir si queremos un job u otro
+      job:
+        description: "Choose a job"
+        required: true
+        type: choice
+        options:
+          - deploy
+          - phpunit
 
 jobs:
   phpunit:
@@ -43,8 +37,10 @@ jobs:
       #   working-directory: ./src/php
 
   deploy:
-    if: ${{ success() }} 
     runs-on: ubuntu-latest
+    needs: phpunit
+    if: ${{ success() }}
+
     env:
       aws_region: us-east-1 # Variable de entorno en GitHub Action
 
@@ -96,12 +92,6 @@ jobs:
         working-directory: ./terraform
         run: terraform apply -auto-approve # Auto-approve para que no pida ninguna confirmación***
 
-      # - name: Upload Terraform State
-      #   uses: actions/upload-artifact@v4.4.3 # Carga como artefacto el estado de Terraform después de sufrir cambios
-      #   with:
-      #     name: terraform-state
-      #     path: ./terraform/terraform.tfstate # Cambia a la ruta correcta
-
       - name: Upload terraform-state to S3
         run: aws s3 cp terraform/terraform.tfstate s3://bucket-jose-manuel/terraform.tfstate # Copia el tf.state creado en Ubuntu al bucket desde AWS CLI
 
@@ -113,12 +103,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      # - name: Descargar tfstate como artefacto
-      #   uses: actions/download-artifact@v4.1.8
-      #   with:
-      #     name: terraform-state
-      #     path: ./
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4 # Acción para autenticarse en AWS
