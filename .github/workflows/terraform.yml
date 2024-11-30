@@ -1,18 +1,18 @@
 name: Generate JSDoc Documentation, deploy Terraform & test with PHPUnit
 
 on:
-  # push:
-  #   branches:
-  #     - main
-  workflow_dispatch:
-    inputs: # Podemos elegir si queremos un job u otro
-      job:
-        description: "Choose a job"
-        required: true
-        type: choice
-        options:
-          - deploy
-          - phpunit
+  push:
+    branches:
+      - main
+  # workflow_dispatch:
+  #   inputs: # Podemos elegir si queremos un job u otro
+  #     job:
+  #       description: "Choose a job"
+  #       required: true
+  #       type: choice
+  #       options:
+  #         - deploy
+  #         - phpunit
 
 jobs:
   phpunit:
