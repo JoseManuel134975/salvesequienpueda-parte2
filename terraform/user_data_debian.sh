@@ -41,9 +41,9 @@ sudo systemctl restart nginx
 sudo sed -i '/location \/ {/a\    autoindex on;' /etc/nginx/sites-available/default
 sudo systemctl restart nginx
 
-# 5- Redireccionar a HTTPS. Hay variantes para una URL específica y demás***
-sudo sed -i '/listen \[::\]:80 default_server;/a\    return 301 https://$host$request_uri;' /etc/nginx/sites-available/default
-sudo systemctl restart nginx
+# 5- Redireccionar a HTTPS. Hay variantes para una URL específica y demás. Está comentado porque todavía no tenemos certificados***
+#sudo sed -i '/listen \[::\]:80 default_server;/a\    return 301 https://$host$request_uri;' /etc/nginx/sites-available/default
+#sudo systemctl restart nginx
 # Para una temporal se usa 'return 302'
 
 # 6- Se le pasa el número del error (404 en este caso) y la correspondiente página HTML (creada por ti)
@@ -143,3 +143,4 @@ sudo systemctl restart nginx
 sudo htpasswd -cb /etc/nginx/.htpasswd usuario usuario
 sudo sed -i '/location \/ {/a\    auth_basic "Área Restringida";\n    auth_basic_user_file /etc/nginx/.htpasswd;' /etc/nginx/sites-available/otrositio
 sudo systemctl restart nginx
+sudo systemctl start nginx

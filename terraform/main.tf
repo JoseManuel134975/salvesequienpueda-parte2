@@ -33,6 +33,13 @@ resource "aws_security_group" "allow_http_and_ssh" {
     cidr_blocks = [ "0.0.0.0/0" ]
   }
 
+  ingress {
+    from_port = 7667
+    to_port = 7667
+    protocol = "tcp"
+    cidr_blocks = [ "0.0.0.0/0" ]
+  }
+
   # Reglas de salida
   egress {
     from_port = 0
