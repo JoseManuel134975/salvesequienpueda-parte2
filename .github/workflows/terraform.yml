@@ -6,7 +6,10 @@ name: Generate Documentation & deploy/destroy on Terraform/AWS
 #       - main
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+  # workflow_dispatch:
     # inputs: # Podemos elegir si queremos un job u otro
     #   job:
     #     description: "Choose a job"
